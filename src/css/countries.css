@@ -1,0 +1,49 @@
+table, th, td {
+  border: 1px solid white;
+}
+
+.mainForm {
+  width: 90%;
+  padding-top: 20px;
+}
+
+.tableFlex {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.countryTable {
+  max-width: 80%;
+}
+
+.formDiv {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sendForm {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.infoFlex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.acctInfo {
+  width: 100%;
+  font-size: 12px;
+}
+
+.paddedDiv {
+  padding-bottom: 50px;
+}

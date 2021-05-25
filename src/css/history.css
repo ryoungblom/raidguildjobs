@@ -1,0 +1,66 @@
+table, th, td {
+  border: 1px solid white;
+}
+
+.mainForm {
+  width: 90%;
+  padding-top: 20px;
+}
+
+.centerFlex {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tableFlexHistory {
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.countryEditTable {
+  max-width: 80%;
+}
+
+.tablePadding {
+  padding-left: 60px;
+}
+
+.formDiv {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sendForm {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.infoFlex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.acctInfo {
+  width: 100%;
+  font-size: 12px;
+}
+
+.paddedDiv {
+  padding-bottom: 50px;
+}
+
+.renderHistoryHeader {
+  font-size: calc(1px + 2vmin) !important;
+}
