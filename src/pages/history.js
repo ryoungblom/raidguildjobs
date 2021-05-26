@@ -3,7 +3,7 @@ import '../App.css';
 import '../css/history.css'
 import Web3 from 'web3'
 
-import { COUNTRY_ABI, COUNTRY_ADDRESS } from '../config.js'
+import { JOB_ABI, JOB_ADDRESS } from '../config.js'
 
 class History extends Component {
 
@@ -101,7 +101,7 @@ class History extends Component {
     this.isInstalled();
     this.isLocked(web3);
 
-    const countryData = new web3.eth.Contract(COUNTRY_ABI, COUNTRY_ADDRESS)
+    const countryData = new web3.eth.Contract(JOB_ABI, JOB_ADDRESS)
 
     this.setState({ countryData })
 

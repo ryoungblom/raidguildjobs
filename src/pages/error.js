@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../assets/boilerplate/logo.svg';
+import logo from '../assets/raidguild_logo.png';
 import '../css/home.css';
 
 

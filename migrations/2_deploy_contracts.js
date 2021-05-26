@@ -1,7 +1,7 @@
-var Countries = artifacts.require("CountryData");
+var Jobs = artifacts.require("JobData");
 var Companies = artifacts.require("CompanyData");
 
 module.exports = function(deployer) {
-  deployer.deploy(Countries);
+  deployer.deploy(Jobs);
   deployer.deploy(Companies);
 };
