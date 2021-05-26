@@ -13,7 +13,7 @@ class Companies extends Component {
 
 
   componentDidMount(){
-    document.title = "Climateth"
+    document.title = "Raid Guild Job Board"
   }
 
 
@@ -97,7 +97,7 @@ class Companies extends Component {
       <div className="App">
         <header className="App-header">
 
-          <h1>CO2 Data By Company</h1>
+          <h1>Registered companies</h1>
 
           <p> Account: {this.state.account}</p>
           <p> Balance: {this.state.balance}</p>

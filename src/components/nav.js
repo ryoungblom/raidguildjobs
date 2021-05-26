@@ -13,8 +13,7 @@ class Navigation extends React.Component {
       <Menu right>
         <a id="home" className="menu-item" href="/">Home</a>
         <a id="account" className="menu-item" href="/companies">Companies</a>
-        <a id="contract" className="menu-item" href="/countries">Countries</a>
-        <a id="history" className="menu-item" href="/history">History</a>
+        <a id="contract" className="menu-item" href="/jobs">Jobs</a>
         <a id="contract" className="menu-item" href="/help">Help</a>
         {/*<a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>*/}
       </Menu>

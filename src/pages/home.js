@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../assets/boilerplate/logo.svg';
+import logo from '../assets/raidguild_logo.png';
 import '../css/home.css';
 import Web3 from 'web3'
 
@@ -14,7 +14,7 @@ class Home extends Component {
 
 
   componentDidMount(){
-    document.title = "Climateth"
+    document.title = "Raid Guild Job Board"
   }
 
 
@@ -103,16 +103,16 @@ class Home extends Component {
         {this.state.web3 ?
           <div>
             <p>
-              Welcome to <code>Climateth</code><br />
-              An Extra-Jurisdictional Carbon Emissions Database
+              Welcome to the <code>Raid Guild Job Board</code><br />
+              The Web3 4Chan for Freelancers
             </p>
             <img src={logo} className="App-logo" alt="logo" />
             <p>
-              Carbon data currently stored on the Ropsten (Ethereum) testnet.
+              Data is currently stored on the Ropsten (Ethereum) testnet.
             </p>
             <a
               className="App-link"
-              href="https://github.com/ryoungblom/climateth"
+              href="https://github.com/ryoungblom/raidguildjobs"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -124,8 +124,8 @@ class Home extends Component {
 
           <div>
             <p>
-              Welcome to <code>Climateth</code> <br />
-              An Extra-Jurisdictional Carbon Emissions Database.
+              Welcome to the <code>Raid Guild Job Board</code><br />
+              The Web3 4Chan for Freelancers
             </p>
             <img src={logo} className="App-logo" alt="logo" />
             <p>
@@ -135,7 +135,7 @@ class Home extends Component {
             </p>
             <a
               className="App-link"
-              href="https://github.com/ryoungblom/climateth"
+              href="https://github.com/ryoungblom/raidguildjobs"
               target="_blank"
               rel="noopener noreferrer"
             >

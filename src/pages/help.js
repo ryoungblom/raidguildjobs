@@ -5,7 +5,7 @@ import '../App.css';
 class Help extends Component {
 
   componentDidMount(){
-    document.title = "Climateth"
+    document.title = "Raid Guild Job Board"
   }
 
   render() {
