@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import logo from '../assets/raidguild_logo.png';
-import '../css/home.css';
 import Web3 from 'web3'
 
 

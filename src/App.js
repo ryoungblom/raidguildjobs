@@ -1,6 +1,11 @@
+import '@fontsource/mirza';
+import '@fontsource/uncial-antiqua';
+
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ChakraProvider, theme } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
+
+import theme from './theme';
 
 import Navigation from './components/nav.js'
 

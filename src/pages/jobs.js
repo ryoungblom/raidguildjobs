@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import "../App.css";
-import "../css/jobs.css";
 import Web3 from "web3";
 
 import { JOB_ABI, JOB_ADDRESS } from "../config.js";
