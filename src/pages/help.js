@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import { JOB_ADDRESS } from '../config';
 
 
 class Help extends Component {
@@ -19,7 +20,7 @@ class Help extends Component {
           </p>
 
           <p>
-            Climateth currently runs on the Ropsten testnet (Contract: 0x7f38B87C937fDE513616a78B37d3d4B10EB6cf6C). <br />
+            RaidGuild Job Board currently runs on the Ropsten testnet (Contract: {JOB_ADDRESS}). <br />
             A local build can also be run via the source code.
           </p>
 
