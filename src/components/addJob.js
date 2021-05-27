@@ -1,115 +1,86 @@
-import React, { Component } from 'react';
-import Web3 from 'web3'
-import '../css/jobs.css'
+import React, { Fragment, useEffect, useState } from 'react';
+import Web3 from 'web3';
+import {
+  Input,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Textarea,
+  useDisclosure
+} from '@chakra-ui/react';
+import { PrimaryButton, SecondaryButton, CancelButton } from './buttons';
 
-import { JOB_ABI, JOB_ADDRESS } from '../config.js'
+import { JOB_ABI, JOB_ADDRESS } from '../config.js';
 
+const runWeb3 = async () => {
+	if (window.ethereum) {
+		window.web3 = new Web3(window.ethereum);
+		await window.ethereum.enable();
+	} else if (window.web3) {
+		window.web3 = new Web3(window.web3.currentProvider);
+	} else {
+		window.alert('Non-Ethereum browser detected. Please install MetaMask or similar!');
+	}
+};
 
-class NewJob extends Component {
+const AddJob = (props) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [jobData, setJobData] = useState({});
+	const [account, setAccount] = useState('');
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  async componentWillMount() {
-    await this.runWeb3()
-    await this.blockchain()
-    this.forceUpdate()
-  }
-
-
-  componentDidMount(){
-    document.title = "react-web3"
-  }
-
-
-  async componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      account: '',
-      balance: '',
-      loading: true
-    }
-
-    this.addJob = this.addJob.bind(this)
-  }
-
-  async runWeb3() {
-
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum)
-      await window.ethereum.enable()
-    }
-    else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider)
-    }
-    else {
-      window.alert('Non-Ethereum browser detected. Please install MetaMask or similar!')
-    }
-  }
-
-
-  async blockchain() {
-
+  const blockchain = async () => {
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
 
-
-    const jobData = new web3.eth.Contract(JOB_ABI, JOB_ADDRESS)
-
-    this.setState({ jobData })
+    setJobData(new web3.eth.Contract(JOB_ABI, JOB_ADDRESS))
 
     const accounts = await web3.eth.getAccounts()
-    const balanceInWei = await web3.eth.getBalance(accounts[0])
-    var balance = balanceInWei/1000000000000000000
-    var account = accounts[0]
-
-    this.setState({ account: account, balance: balance, loading: false })
+    setAccount(accounts[0])
   }
 
+  useEffect(() => {
+    (async function setup () {
+      await runWeb3();
+      await blockchain();
+    })()
+  }, [])
 
-   addJob(name, desciption) {
+  const update = (set) => (event) => {
+    set(event.target.value)
+  };
 
-     this.state.jobData.methods.addJob(name, desciption).send({ from: this.state.account })
-   }
+  const onSubmit = (event) => {
+		jobData.methods.addJob(title, description).send({ from: account })
+    onClose();
+  };
 
- 
-  render() {
-    return (
+  return (
+    <Fragment>
+      <SecondaryButton onClick={onOpen}>Add Job</SecondaryButton>
 
-      <div className = "mainForm">
+      <Modal borderWidth="1px" borderColor="primary.500" onClose={onClose} isOpen={isOpen} isCentered>
+        <ModalOverlay />
+        <ModalContent layerStyles="rg">
+          <ModalHeader>Add job</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Input variant="rg" onChange={update(setTitle)} type="text" placeholder="Title" required />
+            <Textarea variant="rg" onChange={update(setDescription)} placeholder="Description" required />
+          </ModalBody>
+          <ModalFooter>
+            <CancelButton onClick={onClose}>Cancel</CancelButton>
+            <PrimaryButton onClick={onSubmit}>Add</PrimaryButton>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
 
-        <hr />
+    </Fragment>
+  );
+};
 
-        <h1> Add Data </h1>
-
-        <div className = "formDiv">
-
-          <form className = "sendForm" onSubmit={(event) => {
-            event.preventDefault()
-            this.addJob(this.newTitle.value, this.newDescription.value)
-            }}>
-
-            <input ref={(input) => this.newTitle = input} type="text" className="addJobForm" placeholder="Title" required />
-            <input ref={(input) => this.newDescription = input} type="text" className="addJobForm" placeholder="Description" required />
-
-            <br />
-              <input type="submit" hidden={false} />
-          </form>
-
-        </div>
-
-        <div className = "infoFlex">
-          <span> &nbsp; </span>
-          <span className="acctInfo">Account: {this.state.account}</span>
-          <span className="acctInfo">Balance: @{this.state.balance}</span>
-          <span> &nbsp; </span>
-        </div>
-
-      </div>
-
-    );
-  }
-}
-
-export default NewJob;
+export default AddJob;

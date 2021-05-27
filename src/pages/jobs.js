@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import "../App.css";
-import "../css/jobs.css";
 import Web3 from "web3";
 
 import { JOB_ABI, JOB_ADDRESS } from "../config.js";
@@ -269,7 +267,7 @@ class Jobs extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <header className="App-header">
           <div className="tableFlex">
             <h1 id="title">Jobs by Owner</h1>
