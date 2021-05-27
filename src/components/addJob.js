@@ -12,7 +12,7 @@ import {
   Textarea,
   useDisclosure
 } from '@chakra-ui/react';
-import { PrimaryButton, SecondaryButton, CancelButton } from './buttons';
+import { PrimaryButton, CancelButton } from './buttons';
 
 import { JOB_ABI, JOB_ADDRESS } from '../config.js';
 
@@ -61,7 +61,7 @@ const AddJob = (props) => {
 
   return (
     <Fragment>
-      <SecondaryButton onClick={onOpen}>Add Job</SecondaryButton>
+      <PrimaryButton onClick={onOpen}>Add Job</PrimaryButton>
 
       <Modal borderWidth="1px" borderColor="primary.500" onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
