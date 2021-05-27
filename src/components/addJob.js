@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Web3 from 'web3';
 import {
-  Button,
   Input,
   Modal,
   ModalOverlay,
@@ -10,8 +9,10 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
+  Textarea,
   useDisclosure
 } from '@chakra-ui/react';
+import { PrimaryButton, SecondaryButton, CancelButton } from './buttons';
 
 import { JOB_ABI, JOB_ADDRESS } from '../config.js';
 
@@ -54,27 +55,26 @@ const AddJob = (props) => {
   };
 
   const onSubmit = (event) => {
-    onClose();
 		jobData.methods.addJob(title, description).send({ from: account })
+    onClose();
   };
 
   return (
     <Fragment>
+      <SecondaryButton onClick={onOpen}>Add Job</SecondaryButton>
 
-      <Button colorScheme="primary" variant="outline" onClick={onOpen}>Add Job</Button>
-
-      <Modal onClose={onClose} isOpen={isOpen} isCentered>
+      <Modal borderWidth="1px" borderColor="primary.500" onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent layerStyles="rg">
           <ModalHeader>Add job</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Input onChange={update(setTitle)} type="text" placeholder="Title" required />
-            <Input onChange={update(setDescription)} type="text" placeholder="Description" required />
+            <Input variant="rg" onChange={update(setTitle)} type="text" placeholder="Title" required />
+            <Textarea variant="rg" onChange={update(setDescription)} placeholder="Description" required />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="primary" variant="ghost" onClick={onClose}>Cancel</Button>
-            <Button colorScheme="primary" variant="solid" onClick={onSubmit}>Add</Button>
+            <CancelButton onClick={onClose}>Cancel</CancelButton>
+            <PrimaryButton onClick={onSubmit}>Add</PrimaryButton>
           </ModalFooter>
         </ModalContent>
       </Modal>
