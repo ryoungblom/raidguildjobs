@@ -34,11 +34,20 @@ const theme = extendTheme({
       }
     },
 
-    Button: {
+    Input: {
+      parts: ['field'],
       baseStyle: {
-        bg: 'primary.500'
+        field: {
+          color: 'black'
+        }
       }
-    }
+    },
+
+    ModalHeader: {
+      baseStyle: {
+        color: 'black'
+      }
+    },
   }
 });
 
