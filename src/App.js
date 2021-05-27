@@ -2,14 +2,12 @@ import '@fontsource/mirza';
 import '@fontsource/uncial-antiqua';
 
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import theme from './theme';
 
-import Navigation from './components/nav.js'
-
-import Home from './pages/home.js';
+import LayoutDefault from './components/layoutDefault';
 import Companies from './pages/companies.js';
 import Jobs from './pages/jobs.js';
 import Error from './pages/error.js';
@@ -22,24 +20,21 @@ class App extends Component {
     return (
       <ChakraProvider theme={theme}>
          <BrowserRouter>
-          <div>
-            <Navigation />
-              <Switch>
-               <Route path="/" render={props =>
-                 (<Home {...props} state={this.state}/>)
-               } exact/>
-               <Route path="/jobs" render={props =>
-                 (<Jobs {...props} state={this.state}/>)
-               } exact/>
-               <Route path="/companies" render={props =>
-                 (<Companies {...props} state={this.state}/>)
-               } exact/>
+            <Switch>
+             <LayoutDefault exact path="/" render={props =>
+               (<Jobs {...props} state={this.state}/>)
+             } />
 
-               <Route path="/help" component={Help}/>
+             <LayoutDefault exact path="/companies" render={props =>
+               (<Companies {...props} state={this.state}/>)
+             } />
 
-               <Route component={Error}/>
-             </Switch>
-          </div>
+             <LayoutDefault exact path="/help" render={props =>
+               (<Help {...props} state={this.state}/>)
+             } />
+
+             <LayoutDefault exact component={Error}/>
+           </Switch>
         </BrowserRouter>
       </ChakraProvider>
     );

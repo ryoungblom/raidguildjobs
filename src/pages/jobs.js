@@ -267,7 +267,7 @@ class Jobs extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <header className="App-header">
           <div className="tableFlex">
             <h1 id="title">Jobs by Owner</h1>

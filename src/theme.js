@@ -29,7 +29,9 @@ const theme = extendTheme({
 
   components: {
     Heading: {
-      color: 'primary.500'
+      baseStyle: {
+        color: 'primary.500'
+      }
     }
   }
 });
