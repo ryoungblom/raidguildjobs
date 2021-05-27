@@ -32,6 +32,12 @@ const theme = extendTheme({
       baseStyle: {
         color: 'primary.500'
       }
+    },
+
+    Button: {
+      baseStyle: {
+        bg: 'primary.500'
+      }
     }
   }
 });

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from '@chakra-ui/react';
 import Web3 from 'web3'
 
 import { JOB_ABI, JOB_ADDRESS } from '../config.js'
@@ -89,11 +90,11 @@ class NewJob extends Component {
             this.addJob(this.newTitle.value, this.newDescription.value)
             }}>
 
-            <input ref={(input) => this.newTitle = input} type="text" className="addJobForm" placeholder="Title" required />
-            <input ref={(input) => this.newDescription = input} type="text" className="addJobForm" placeholder="Description" required />
+            <Button ref={(input) => this.newTitle = input} type="text" className="addJobForm" placeholder="Title" required />
+            <Button ref={(input) => this.newDescription = input} type="text" className="addJobForm" placeholder="Description" required />
 
             <br />
-              <input type="submit" hidden={false} />
+              <Button type="submit" hidden={false} />
           </form>
 
         </div>
