@@ -36,18 +36,43 @@ const theme = extendTheme({
 
     Input: {
       parts: ['field'],
-      baseStyle: {
-        field: {
-          color: 'black'
+      variants: {
+        rg: {
+          field: {
+            color: 'white',
+            bg: 'black',
+            border: '1px solid',
+            borderColor: 'primary.500',
+            margin: '5px'
+          }
         }
       }
     },
 
-    ModalHeader: {
-      baseStyle: {
-        color: 'black'
+    Textarea: {
+      variants: {
+        rg: {
+          color: 'white',
+          bg: 'black',
+          border: '1px solid',
+          borderColor: 'primary.500',
+          margin: '5px'
+        }
       }
     },
+
+    Modal: {
+      parts: ['dialog'],
+      baseStyle: {
+        dialog: {
+          bg: 'black',
+          color: 'primary.500',
+          border: '1px solid',
+          borderColor: 'primary.800'
+        }
+      }
+    },
+
   }
 });
 
