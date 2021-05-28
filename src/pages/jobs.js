@@ -25,10 +25,10 @@ class Jobs extends Component {
       jobs: [],
       headers: [
         "ID",
+        "Timestamp",
         "Owner",
         "Title",
         "Description",
-        "Created",
         "Active workers",
         "Edit",
       ],
@@ -103,7 +103,7 @@ class Jobs extends Component {
   }
 
   async getData() {
-    this.setState({ countries: [] });
+    //this.setState({ jobs: [] });
 
     var jobCount = await this.state.jobData.methods.jobCount().call();
 
@@ -127,6 +127,20 @@ class Jobs extends Component {
   //   this.setState({loading:true})
 
   // }
+
+
+   //async updateJobs(id, name, total, perCap, epi, eh, ev) {
+
+  //   this.setState({loading:false})
+
+     //this.state.jobData.methods.updateJobs(id, name, total, perCap, epi, eh, ev).send({ from: this.state.account }).once('receipt', (receipt) => {
+  //       this.setState({ editing: false })
+//         this.getData()
+  //     })
+
+  //   this.setState({loading:true})
+
+   //}
 
   /*
   { this.state.loading
@@ -232,15 +246,16 @@ class Jobs extends Component {
 
   renderTableData() {
     return this.state.jobs.map((eachJob, index) => {
-      const { id, creationTimestamp, owner, workers, title, description } =
+      const { id, creationTimestamp, owner, title, description, active, workers } =
         eachJob; //destructuring
       return (
         <tr key={id}>
           <td>{id}</td>
+          <td>{creationTimestamp}</td>
           <td>{owner}</td>
           <td>{title}</td>
           <td>{description}</td>
-          <td>{creationTimestamp}</td>
+          <td>{active}</td>
           <td>{workers}</td>
           <td>
             <button onClick={() => this.editing(id)}> Edit </button>
@@ -275,9 +290,11 @@ class Jobs extends Component {
               <tbody>
                 <tr>{this.renderTableHeader()}</tr>
 
-                {this.state.editing
-                  ? this.renderEditData(this.state.updating)
-                  : this.renderTableData()}
+
+                  {this.state.editing
+                    ? this.renderTableData()
+                    : this.renderTableData()}
+
               </tbody>
             </table>
           </div>
