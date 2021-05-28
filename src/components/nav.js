@@ -1,34 +1,42 @@
-import React, { Component } from 'react'
-import { stack as Menu } from 'react-burger-menu'
+import React from 'react'
+import {
+  Drawer,
+  DrawerOverlay,
+  DrawerHeader,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerBody,
+  Link,
+  Stack,
+  useDisclosure
+} from '@chakra-ui/react'
+import { Link as LinkDom } from 'react-router-dom'
+import { SecondaryButton } from './buttons'
 
-const styles = {
-  bmBurgerButton: {
-    position: 'fixed',
-    width: '36px',
-    height: '30px',
-    right: '36px',
-    top: '36px'
-  },
-  bmBurgerBars: {
-    background: '#ff3864'
-  },
-  bmBurgerBarsHover: {
-    background: '#ff0940'
-  }
-}
+const Navigation = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
-class Navigation extends Component {
-  render () {
-    // NOTE: You also need to provide styles, see https://github.com/negomi/react-burger-menu#styling
-    return (
-      <Menu styles={styles} right>
-        <a className="menu-item" href="/">Home</a>
-        <a className="menu-item" href="/companies">Companies</a>
-        <a className="menu-item" href="/">Jobs</a>
-        <a className="menu-item" href="/help">Help</a>
-      </Menu>
-    );
-  }
+  return (
+    <>
+      <SecondaryButton onClick={onOpen}>Menu</SecondaryButton>
+
+      <Drawer isOpen={isOpen} onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader></DrawerHeader>
+          <DrawerBody>
+            <Stack>
+              <Link as={LinkDom} to="/">Home</Link>
+              <Link as={LinkDom} to="/companies">Companies</Link>
+              <Link as={LinkDom} to="/">Jobs</Link>
+              <Link as={LinkDom} to="/help">Help</Link>
+            </Stack>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
+  )
 }
 
 export default Navigation
