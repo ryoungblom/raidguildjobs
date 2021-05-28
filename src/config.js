@@ -7,7 +7,7 @@ import contract from "./contracts/JobData.json"
 
 //Ganache:
 
-export const JOB_ADDRESS = '0x3a211b6Df476b883a66BB298F75eCAab7aB5E9c7'
+export const JOB_ADDRESS = '0x00F6cC893c9e089570Dd118016eE63D40113aa43'
 
 
 export const JOB_ABI = contract.abi;
