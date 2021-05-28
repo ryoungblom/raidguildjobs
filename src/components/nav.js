@@ -6,7 +6,6 @@ import {
   DrawerContent,
   DrawerCloseButton,
   DrawerBody,
-  HamburgerIcon,
   Link,
   Stack,
   useDisclosure
