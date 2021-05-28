@@ -3,8 +3,6 @@ import Web3 from "web3";
 
 import { JOB_ABI, JOB_ADDRESS } from "../config.js";
 
-import NewJob from "../components/addJob.js";
-
 class Jobs extends Component {
   async componentWillMount() {
     await this.runWeb3();
@@ -281,8 +279,6 @@ class Jobs extends Component {
               </tbody>
             </table>
           </div>
-
-          <NewJob />
 
           <div className="paddedDiv" />
         </header>

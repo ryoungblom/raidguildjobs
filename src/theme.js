@@ -21,6 +21,7 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
+        padding: '0.5rem',
         bg: 'black',
         color: 'white'
       }
@@ -67,6 +68,17 @@ const theme = extendTheme({
         dialog: {
           bg: 'black',
           color: 'primary.500',
+          border: '1px solid',
+          borderColor: 'primary.800'
+        }
+      }
+    },
+
+    Drawer: {
+      parts: ['dialog'],
+      baseStyle: {
+        dialog: {
+          bg: 'primary.500',
           border: '1px solid',
           borderColor: 'primary.800'
         }
