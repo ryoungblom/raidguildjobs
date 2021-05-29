@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { useRaidJobs } from "../contexts/raidJobsContext.tsx";
+import jobCard from "../components/jobCard";
+import { CardContainer } from "../components/containers";
 
 //TODO Update/Delete for Jobs
 const Jobs = () => {
@@ -43,29 +45,7 @@ const Jobs = () => {
 
   const renderTableData = () => {
     return jobData.map((eachJob, index) => {
-      const {
-        id,
-        creationTimestamp,
-        owner,
-        title,
-        description,
-        active,
-        workers,
-      } = eachJob; //destructuring
-      return (
-        <tr key={id}>
-          <td>{id}</td>
-          <td>{creationTimestamp}</td>
-          <td>{owner}</td>
-          <td>{title}</td>
-          <td>{description}</td>
-          <td>{active}</td>
-          <td>{workers}</td>
-          <td>
-            <button onClick={() => editJob(id)}> Edit </button>
-          </td>
-        </tr>
-      );
+      return jobCard(eachJob);
     });
   };
 
@@ -82,16 +62,8 @@ const Jobs = () => {
   return (
     <div>
       <header className="App-header">
-        <div className="tableFlex">
-          <h1 id="title">Jobs by Owner</h1>
-          <table id="jobs" className="jobsTable">
-            <tbody>
-              <tr>{renderTableHeader()}</tr>
-
-              {renderTableData()}
-            </tbody>
-          </table>
-        </div>
+        <h1 id="title">Jobs overview</h1>
+        <CardContainer>{renderTableData()}</CardContainer>
 
         <div className="paddedDiv" />
       </header>
