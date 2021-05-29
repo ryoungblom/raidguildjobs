@@ -91,6 +91,7 @@ export const InjectedProvider: React.FC<InjectedProviderProps> = ({
 
   useEffect(() => {
     if (window.localStorage.getItem('WEB3_CONNECT_CACHED_PROVIDER')) {
+      console.log('CACHED');
       connectProvider();
     }
   }, []);
@@ -131,7 +132,8 @@ export const InjectedProvider: React.FC<InjectedProviderProps> = ({
   }, [injectedProvider]);
 
   const requestWallet = async () => {
-    connectProvider();
+    console.log('REQUEST WALLET');
+    await connectProvider();
   };
 
   const disconnectDapp = async () => {
@@ -158,20 +160,5 @@ export const InjectedProvider: React.FC<InjectedProviderProps> = ({
 };
 
 export const useInjectedProvider = () => {
-  const {
-    injectedProvider,
-    requestWallet,
-    disconnectDapp,
-    injectedChain,
-    address,
-    web3Modal,
-  } = useContext(InjectedProviderContext);
-  return {
-    injectedProvider,
-    requestWallet,
-    disconnectDapp,
-    injectedChain,
-    web3Modal,
-    address,
-  };
+  return useContext(InjectedProviderContext);
 };
