@@ -1,111 +1,62 @@
-import React, { Component } from 'react';
-import Web3 from 'web3'
+import React, { useEffect, useState } from "react";
+
+import Web3 from 'web3';
+
+import { useInjectedProvider } from "../contexts/injectedProviderContext";
+import { useRaidJobs } from "../contexts/raidJobsContext.tsx";
+
+//TODO overview companies
+const Companies = () => {
+  const { companies } = useRaidJobs();
+  const { address, injectedProvider} = useInjectedProvider();
+  // const [loading, setLoading] = useState(true);
+  // const [showHistory, setShowHistory] = useState(false);
+  // const [editing, setEditing] = useState(false);
+  // const [updating, setUpdating] = useState(0);
+  const [account, setAccount] = useState("");
+  const [balance, setBalance] = useState("");
+  const [companyData, setCompanyData] = useState([]);
 
 
-class Companies extends Component {
-
-  async componentWillMount() {
-    await this.runWeb3()
-    await this.blockchain()
-    this.forceUpdate()
-  }
-
-
-  componentDidMount(){
-    document.title = "Raid Guild Job Board"
-  }
-
-
-  async componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      account: '',
-      balance: '',
-      loading: true
+  useEffect(() => {
+    if(injectedProvider !== null && address !== null){
+      const web3 = new Web3(injectedProvider)
+      const balance = web3.fromWei(web3.eth.getBalance(address))
+      setAccount(address);
+      setBalance(balance);
     }
-  }
+  }, [address, account, injectedProvider])
 
+  useEffect(() => {
+    if (companies !== undefined) {
+      const getCompanies = async () => {
+        const localCompanies = [];
+        const companyCount = await companies.methods.companyCount().call();
 
-  async isInstalled() {
-     if (typeof Web3 !== 'undefined'){
-        console.log('Web3 Provider is installed')
-     }
-     else{
-        console.log('No Web3 Provider!')
-     }
-  }
-
-  async isLocked(web3) {
-     web3.eth.getAccounts(function(err, accounts){
-        if (err != null) {
-           console.log(err)
+        for (var i = 0; i < companyCount; i++) {
+          const singleCompany = await companies.methods.companies(i).call();
+          localCompanies.push(singleCompany);
         }
-        else if (accounts.length === 0) {
-           console.log('Web3 Provider is locked')
-        }
-        else {
-           console.log('Web3 Provider is unlocked')
-        }
-     });
-  }
 
+        return localCompanies;
+      };
 
-  async runWeb3() {
-
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum)
-      await window.ethereum.enable()
+      getCompanies().then((localCompanyData) => {
+        setCompanyData(localCompanyData);
+      });
     }
-    else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider)
-    }
-    else {
-      window.alert('Non-Ethereum browser detected. Please install MetaMask or similar!')
-    }
-  }
+  }, [companies]);
 
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Registered companies</h1>
 
-  async blockchain() {
-
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-
-    this.isInstalled();
-    this.isLocked(web3);
-
-    const accounts = await web3.eth.getAccounts()
-    const balanceInWei = await web3.eth.getBalance(accounts[0])
-    var balance = balanceInWei/1000000000000000000
-    var account = accounts[0]
-
-    console.log("Account: " + account)
-    console.log("Balance: " + balance)
-
-    console.log("web3: " + web3)
-
-    this.setState({ account: accounts[0], balance: balance, loading: false })
-  }
-
-
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-
-          <h1>Registered companies</h1>
-
-          <p> Account: {this.state.account}</p>
-          <p> Balance: {this.state.balance}</p>
-
-        </header>
-      </div>
-
-    );
-  }
-}
+        <p> Account: {account}</p>
+        <p> Balance: {balance}</p>
+      </header>
+    </div>
+  );
+};
 
 export default Companies;
