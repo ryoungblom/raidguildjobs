@@ -33,29 +33,9 @@ const Jobs = () => {
     }
   }, [jobs]);
 
-  const headers = [
-    "ID",
-    "Timestamp",
-    "Owner",
-    "Title",
-    "Description",
-    "Active workers",
-    "Edit",
-  ];
-
-  const renderTableData = () => {
+  const renderJobData = () => {
     return jobData.map((eachJob, index) => {
       return jobCard(eachJob);
-    });
-  };
-
-  const editJob = (id) => {
-    console.log(`Edit for job ${id}`);
-  };
-
-  const renderTableHeader = () => {
-    return headers.map((label, index) => {
-      return <th key={label}>{label.toUpperCase()}</th>;
     });
   };
 
@@ -63,7 +43,7 @@ const Jobs = () => {
     <div>
       <header className="App-header">
         <h1 id="title">Jobs overview</h1>
-        <CardContainer>{renderTableData()}</CardContainer>
+        <CardContainer>{renderJobData()}</CardContainer>
 
         <div className="paddedDiv" />
       </header>

@@ -14,30 +14,34 @@ import { PrimaryButton } from "./buttons";
 
 const jobCard = (job) => {
   const { owner, title, description, creationTimestamp, active } = job;
-  const date = new Date(creationTimestamp * 1000).toDateString();
+
+  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const date = new Date(creationTimestamp * 1000).toLocaleString(options);
   console.log(job);
+
+  const editJob = (id) => {
+    console.log(`Edit for job ${id}`);
+  };
+
   const applyForJob = () => {
     console.log("Applying for job");
   };
 
   return (
     <Box
-      maxW="md"
+      maxW="lg"
       borderWidth="1px"
       borderRadius="lg"
       borderColor="gray"
-      padding="5"
+      padding="2"
       margin="5"
       overflow="hidden"
     >
-      <HStack>
+      <HStack alignItems="start">
         <Avatar
           src="https://1.bp.blogspot.com/-X6Ytbn6nZgA/UYg7oU3DtqI/AAAAAAAAAm8/HyYSBBg4Z6Y/s1600/UMBRELLA+CORPORATION.png"
           size="md"
           name="Company Icon"
-          mt={-10}
-          ml={-2}
-          mr={2}
           borderColor="transparent"
           bgColor="transparent"
         />
@@ -54,7 +58,6 @@ const jobCard = (job) => {
           </Box>
           <Box
             color="primary.500"
-            // fontWeight="semibold"
             letterSpacing="wide"
             fontSize="xs"
             textTransform="uppercase"
@@ -66,8 +69,9 @@ const jobCard = (job) => {
             {description}
           </Box>
         </VStack>
+        <Spacer />
         <PrimaryButton
-          size="md"
+          size="sm"
           onClick={applyForJob}
           textTransform="uppercase"
         >
@@ -83,7 +87,7 @@ const jobCard = (job) => {
             size="md"
             key="first"
             variant="subtle"
-            colorScheme="red"
+            backgroundColor="transparent"
             borderRadius="full"
           >
             <Avatar
@@ -93,13 +97,13 @@ const jobCard = (job) => {
               ml={-2}
               mr={2}
             />
-            <TagLabel>Archer</TagLabel>
+            <TagLabel color="white">Archer</TagLabel>
           </Tag>
           <Tag
             size="md"
             key="second"
             variant="subtle"
-            colorScheme="teal"
+            backgroundColor="transparent"
             borderRadius="full"
           >
             <Avatar
@@ -109,7 +113,7 @@ const jobCard = (job) => {
               ml={-2}
               mr={2}
             />
-            <TagLabel>Monk</TagLabel>
+            <TagLabel color="white">Monk</TagLabel>
           </Tag>
         </HStack>
         <Spacer />
