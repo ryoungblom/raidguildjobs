@@ -13,22 +13,28 @@ import {
 import { PrimaryButton } from "./buttons";
 
 const jobCard = (job) => {
-  const { owner, title, description, creationTimestamp, active } = job;
+  const { owner, title, description, creationTimestamp, active, id } = job;
 
-  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  let options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
   const date = new Date(creationTimestamp * 1000).toLocaleString(options);
-  console.log(job);
+  console.log(job)
 
   const editJob = (id) => {
     console.log(`Edit for job ${id}`);
   };
 
-  const applyForJob = () => {
-    console.log("Applying for job");
+  const applyForJob = (id) => {
+    console.log(`Applying for job ${id.toString()}`);
   };
 
   return (
     <Box
+      key={id}
       maxW="lg"
       borderWidth="1px"
       borderRadius="lg"
@@ -72,7 +78,7 @@ const jobCard = (job) => {
         <Spacer />
         <PrimaryButton
           size="sm"
-          onClick={applyForJob}
+          onClick={() => applyForJob(id)}
           textTransform="uppercase"
         >
           Join Raid
