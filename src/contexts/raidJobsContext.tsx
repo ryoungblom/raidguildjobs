@@ -22,13 +22,18 @@ export const RaidJobsContextProvider: React.FC<RaidJobsContextProps> = ({
 
   const [companies, setCompanies] = useState();
   const [jobs, setJobs] = useState();
-
+/*
   useEffect(() => {
-    requestWallet();
   }, );
+*/
 
   useEffect(() => {
-    if (injectedProvider !== null) {
+    const setup = async () => {
+      if (!injectedProvider) {
+        await requestWallet();
+        return null;
+      }
+
       const web3 = injectedProvider;
 
       const localCompanies: any = new web3.eth.Contract(
@@ -38,8 +43,10 @@ export const RaidJobsContextProvider: React.FC<RaidJobsContextProps> = ({
       const localJobs: any = new web3.eth.Contract(JOB_ABI, JOB_ADDRESS);
       setCompanies(localCompanies);
       setJobs(localJobs);
-    }
-  }, [injectedProvider]);
+    };
+
+    setup()
+  }, [injectedProvider, requestWallet]);
 
   return (
     <RaidJobsContext.Provider
@@ -54,9 +61,5 @@ export const RaidJobsContextProvider: React.FC<RaidJobsContextProps> = ({
 };
 
 export const useRaidJobs = () => {
-  const { companies, jobs } = useContext(RaidJobsContext);
-  return {
-    companies,
-    jobs,
-  };
+  return useContext(RaidJobsContext);
 };

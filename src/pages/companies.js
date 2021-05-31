@@ -25,18 +25,18 @@ const Companies = () => {
 
 
   useEffect(() => {
-    console.log("Checking for provider and address")
-    console.log("Address: ", address);
-    console.log("Account: ", account);
-    console.log("injectedProvider: ", injectedProvider);
-    if(address !== null){
-      console.log("Provider and address found")
-      const web3 = new Web3(injectedProvider)
-      const balance = web3.fromWei(web3.eth.getBalance(address))
-      setAccount(address);
-      setBalance(balance);
-    }
-  }, [address, account])
+    const setupAccount = async () => {
+      if(address && injectedProvider){
+        console.log("Provider and address found")
+        const web3 = new Web3(injectedProvider)
+        const balance = (await web3.eth.getBalance(address)).toString()
+        setAccount(address);
+        setBalance(web3.utils.fromWei(balance));
+      }
+    };
+
+    setupAccount();
+  }, [address, account, injectedProvider])
 
   useEffect(() => {
     console.log("Checking for companies")

@@ -3,7 +3,7 @@ import { Flex } from "@chakra-ui/react";
 
 export const CardContainer = ({ children, ...props }) => (
   <Flex
-    colorScheme="primary"
+    colorscheme="primary"
     variant="solid"
     direction="row"
     wrap="wrap"
