@@ -15,7 +15,6 @@ const Companies = () => {
   // const [updating, setUpdating] = useState(0);
   const [account, setAccount] = useState("");
   const [balance, setBalance] = useState("");
-  const [companyData, setCompanyData] = useState([]);
 
   useEffect(() => {
     if(injectedProvider === null){

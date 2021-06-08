@@ -13,7 +13,7 @@ import {
 import { PrimaryButton } from "./buttons";
 
 const jobCard = (job) => {
-  const { owner, title, description, creationTimestamp, active, id } = job;
+  const { owner, title, description, creationTimestamp, id } = job;
 
   let options = {
     weekday: "long",
@@ -23,10 +23,6 @@ const jobCard = (job) => {
   };
   const date = new Date(creationTimestamp * 1000).toLocaleString(options);
   console.log(job)
-
-  const editJob = (id) => {
-    console.log(`Edit for job ${id}`);
-  };
 
   const applyForJob = (id) => {
     console.log(`Applying for job ${id.toString()}`);
