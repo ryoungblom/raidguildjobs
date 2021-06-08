@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-import { JOB_ABI, JOB_ADDRESS, COMPANY_ABI, COMPANY_ADDRESS } from "../config";
+import { JOB_ABI, JOB_ADDRESS, COMPANY_ABI, COMPANY_ADDRESS } from "../config.js";
 
 import { useInjectedProvider } from "../contexts/injectedProviderContext";
 
@@ -40,6 +40,7 @@ export const RaidJobsContextProvider: React.FC<RaidJobsContextProps> = ({
         COMPANY_ABI,
         COMPANY_ADDRESS
       );
+
       const localJobs: any = new web3.eth.Contract(JOB_ABI, JOB_ADDRESS);
       setCompanies(localCompanies);
       setJobs(localJobs);

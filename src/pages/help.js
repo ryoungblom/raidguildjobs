@@ -19,7 +19,7 @@ class Help extends Component {
           </p>
 
           <p>
-            RaidGuild Job Board currently runs on the Ropsten testnet (Contract: {JOB_ADDRESS}). <br />
+            RaidGuild Job Board currently runs on the Mtic Mumbai testnet (Contract: {JOB_ADDRESS}). <br />
             A local build can also be run via the source code.
           </p>
 

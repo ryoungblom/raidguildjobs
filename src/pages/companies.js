@@ -45,7 +45,6 @@ const Companies = () => {
       const getCompanies = async () => {
         const localCompanies = [];
         const companyCount = await companies.methods.companyCount().call();
-
         for (var i = 0; i < companyCount; i++) {
           const singleCompany = await companies.methods.companies(i).call();
           localCompanies.push(singleCompany);
