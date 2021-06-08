@@ -1,5 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import Web3 from 'web3';
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Input,
   Modal,
@@ -10,52 +9,40 @@ import {
   ModalBody,
   ModalFooter,
   Textarea,
-  useDisclosure
-} from '@chakra-ui/react';
-import { PrimaryButton, CancelButton } from './buttons';
+  useDisclosure,
+} from "@chakra-ui/react";
+import { PrimaryButton, CancelButton } from "./buttons";
 
-import { JOB_ABI, JOB_ADDRESS } from '../config.js';
+import { useRaidJobs } from "../contexts/raidJobsContext";
+import { useInjectedProvider } from "../contexts/injectedProviderContext";
 
-const runWeb3 = async () => {
-	if (window.ethereum) {
-		window.web3 = new Web3(window.ethereum);
-		await window.ethereum.enable();
-	} else if (window.web3) {
-		window.web3 = new Web3(window.web3.currentProvider);
-	} else {
-		window.alert('Non-Ethereum browser detected. Please install MetaMask or similar!');
-	}
-};
+const AddJob = () => {
+  const { jobs } = useRaidJobs();
+  const { address } = useInjectedProvider();
+  const [account, setAccount] = useState()
+  
+  useEffect(() => {
+    
+    console.log("Address: ", address)
 
-const AddJob = (props) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [jobData, setJobData] = useState({});
-	const [account, setAccount] = useState('');
+    if(address !== null) {
+
+      setAccount(address)
+
+    }
+  }, [address ])
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const blockchain = async () => {
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-
-    setJobData(new web3.eth.Contract(JOB_ABI, JOB_ADDRESS))
-
-    const accounts = await web3.eth.getAccounts()
-    setAccount(accounts[0])
-  }
-
-  useEffect(() => {
-    (async function setup () {
-      await runWeb3();
-      await blockchain();
-    })()
-  }, [])
-
   const update = (set) => (event) => {
-    set(event.target.value)
+    set(event.target.value);
   };
 
   const onSubmit = (event) => {
-		jobData.methods.addJob(title, description).send({ from: account })
+    jobs.methods.addJob(title, description).send({ from: account });
     onClose();
   };
 
@@ -63,14 +50,31 @@ const AddJob = (props) => {
     <Fragment>
       <PrimaryButton onClick={onOpen}>Add Job</PrimaryButton>
 
-      <Modal borderWidth="1px" borderColor="primary.500" onClose={onClose} isOpen={isOpen} isCentered>
+      <Modal
+        borderWidth="1px"
+        borderColor="primary.500"
+        onClose={onClose}
+        isOpen={isOpen}
+        isCentered
+      >
         <ModalOverlay />
         <ModalContent layerStyles="rg">
           <ModalHeader>Add job</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Input variant="rg" onChange={update(setTitle)} type="text" placeholder="Title" required />
-            <Textarea variant="rg" onChange={update(setDescription)} placeholder="Description" required />
+            <Input
+              variant="rg"
+              onChange={update(setTitle)}
+              type="text"
+              placeholder="Title"
+              required
+            />
+            <Textarea
+              variant="rg"
+              onChange={update(setDescription)}
+              placeholder="Description"
+              required
+            />
           </ModalBody>
           <ModalFooter>
             <CancelButton onClick={onClose}>Cancel</CancelButton>
@@ -78,7 +82,6 @@ const AddJob = (props) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
     </Fragment>
   );
 };

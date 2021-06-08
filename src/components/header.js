@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Heading, Image, Spacer } from '@chakra-ui/react';
+import { Box, Flex, Heading, Image, Spacer, HStack } from '@chakra-ui/react';
 import Navigation from './nav';
 import AddJob from './addJob';
 import logo from '../assets/raidguild_logo.png';
@@ -15,10 +15,10 @@ const Header = (props) => (
 
     <Spacer />
 
-    <Box>
+    <HStack spacing="5px">
       <AddJob />
       <Navigation />
-    </Box>
+    </HStack>
   </Flex>
 );
 
