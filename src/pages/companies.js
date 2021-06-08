@@ -15,6 +15,7 @@ const Companies = () => {
   // const [updating, setUpdating] = useState(0);
   const [account, setAccount] = useState("");
   const [balance, setBalance] = useState("");
+  const [companyData, setCompanyData] = useState([]);
 
   useEffect(() => {
     if(injectedProvider === null){
@@ -55,9 +56,10 @@ const Companies = () => {
 
       getCompanies().then((localCompanyData) => {
         setCompanyData(localCompanyData);
+        console.log(companyData)
       });
     }
-  }, [companies]);
+  }, [companies, companyData]);
 
   return (
     <div>
