@@ -38,28 +38,6 @@ const Companies = () => {
     setupAccount();
   }, [address, account, injectedProvider])
 
-  useEffect(() => {
-    console.log("Checking for companies")
-    if (companies !== undefined) {
-      console.log("Companies found")
-      const getCompanies = async () => {
-        const localCompanies = [];
-        const companyCount = await companies.methods.companyCount().call();
-        for (var i = 0; i < companyCount; i++) {
-          const singleCompany = await companies.methods.companies(i).call();
-          localCompanies.push(singleCompany);
-        }
-
-        return localCompanies;
-      };
-
-      getCompanies().then((localCompanyData) => {
-        setCompanyData(localCompanyData);
-        console.log(companyData)
-      });
-    }
-  }, [companies, companyData]);
-
   return (
     <div>
       <header className="App-header">
